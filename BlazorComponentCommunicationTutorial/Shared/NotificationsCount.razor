@@ -1,0 +1,22 @@
+﻿@inject INotificationService NotificationService
+@implements IDisposable
+
+<button type="button" class="btn btn-primary position-relative"
+        @onclick="NotificationService.ResetCount">
+    <i class="oi oi-bell"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        @NotificationService.Count
+    </span>
+</button>
+
+@code {
+    protected override void OnInitialized()
+    {
+        NotificationService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        NotificationService.OnChange -= StateHasChanged;
+    }
+}

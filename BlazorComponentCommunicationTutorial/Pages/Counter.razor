@@ -1,0 +1,32 @@
+﻿@page "/counter"
+@inject INotificationService NotificationService
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+@*<NotificationsCount Count="@currentCount" ResetCount="ResetCount"></NotificationsCount>
+*@
+<p>@notificationMessage</p>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private string notificationMessage = string.Empty;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        NotificationService.IncrementCounter();
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+        notificationMessage = "Counter has been reset.";
+    }
+}
